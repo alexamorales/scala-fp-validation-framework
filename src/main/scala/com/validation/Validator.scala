@@ -62,10 +62,10 @@ object Validator {
    * @param cs List of validation checks: Input => Option[ExecutionStatus]
    * @param i Function that transform pure input I1 into extended one I2 (it can contain extra data from DB)
    * @param o Function that transform extended input into context C and output O
-   * @tparam I1 Pure input e.g. EnableProfileRequest
-   * @tparam I2 Extended input e.g. EnableProfileRequest + required data from DB
+   * @tparam I1 Pure input
+   * @tparam I2 Extended input e.g. Request + required data from DB
    * @tparam C Context type used in Error[C]
-   * @tparam O Output type e.g. updated MessageContext
+   * @tparam O Output type e.g. some updated intermediate data
    * @return Validation output
    */
   def make[I1, I2, C, O](cs: List[Check[I2]])(i: I1 => IO[ExecutionStatus, I2], o: I2 => (C, O)): Validator[I1, C, O] =
